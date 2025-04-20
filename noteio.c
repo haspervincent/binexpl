@@ -2,9 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define NOTE_SIZE 256
-#define FLAG_SIZE 256
-
 #ifdef _WIN32
     #define CLEAR_CMD "cls"
 #elif __linux__ || __APPLE__
@@ -12,6 +9,9 @@
 #else
     #define CLEAR_CMD NULL
 #endif
+
+#define NOTE_SIZE 256
+#define FLAG_SIZE 256
 
 
 typedef struct {
