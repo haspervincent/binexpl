@@ -13,19 +13,19 @@
     #define CLEAR_CMD NULL
 #endif
 
-void clear_terminal(void) 
-{
-    if (CLEAR_CMD != NULL) {
-        system(CLEAR_CMD);
-    }
-}
-
 typedef struct {
     char *text;
     void (*show)(void);
 } note_t;
 
 note_t *note = NULL;
+
+void clear_terminal(void) 
+{
+    if (CLEAR_CMD != NULL) {
+        system(CLEAR_CMD);
+    }
+}
 
 void print_flag(void) 
 {
