@@ -13,12 +13,15 @@
     #define CLEAR_CMD NULL
 #endif
 
+
 typedef struct {
     char *text;
     void (*show)(void);
 } note_t;
 
+
 note_t *note = NULL;
+
 
 void clear_terminal(void) 
 {
@@ -26,6 +29,7 @@ void clear_terminal(void)
         system(CLEAR_CMD);
     }
 }
+
 
 void print_flag(void) 
 {
@@ -45,6 +49,7 @@ void print_flag(void)
     fclose(file);
 }
 
+
 void show_note(void) 
 {
     if (note && note->text) {
@@ -53,6 +58,7 @@ void show_note(void)
         printf("no note found\n");
     }
 }
+
 
 void create_note(void) 
 {
@@ -86,6 +92,7 @@ void create_note(void)
     }
 }
 
+
 void delete_note(void) 
 {
     if (!note) {
@@ -99,6 +106,7 @@ void delete_note(void)
     printf("note deleted\n");
 }
 
+
 void execute_note(void) 
 {
     if (note) {
@@ -107,6 +115,7 @@ void execute_note(void)
         printf("no note exists\n");
     }
 }
+
 
 void run(void) 
 {
@@ -135,6 +144,7 @@ void run(void)
         }
     }
 }
+
 
 int main(void) 
 {
