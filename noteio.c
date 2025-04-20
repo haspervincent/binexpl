@@ -117,31 +117,28 @@ void execute_note(void)
 }
 
 
-void run(void) 
+void handle_input(void) 
 {
     char choice;
+    printf("choice: ");
+    choice = getchar();
+    while (getchar() != '\n'); 
 
-    while (1) {
-        printf("choice: ");
-        choice = getchar();
-        while (getchar() != '\n'); 
-
-        switch (choice) {
-            case '1':
-                create_note();
-                break;
-            case '2':
-                delete_note();
-                break;
-            case '3':
-                execute_note();
-                break;
-            case '4':
-                printf("exiting program\n");
-                exit(EXIT_SUCCESS);
-            default:
-                printf("invalid option\n");
-        }
+    switch (choice) {
+        case '1':
+            create_note();
+            break;
+        case '2':
+            delete_note();
+            break;
+        case '3':
+            execute_note();
+            break;
+        case '4':
+            printf("exiting program\n");
+            exit(EXIT_SUCCESS);
+        default:
+            printf("invalid option\n");
     }
 }
 
@@ -153,6 +150,8 @@ int main(void)
     printf("=== noteio ===\n");
     printf("[1. create note] [2. delete note] [3. show note] [4. exit]\n");
 
-    run();
+    while (1) {
+        handle_input();
+    }
     return 0;
 }
