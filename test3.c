@@ -10,7 +10,7 @@ something_s *s = NULL;
 
 void randfn(void)
 {
-    puts("calling just a random function");
+    puts("this is just a random function call");
 }
 
 void prtflg(void)
