@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #ifdef _WIN32
 #define CLEAR_CMD "cls"
@@ -8,7 +7,7 @@
 #define CLEAR_CMD "clear"
 #endif
 
-#define NAME_SIZE 32
+#define NAME_SIZE 16
 #define NOTE_SIZE 32
 
 typedef struct {
@@ -74,7 +73,6 @@ int main(void)
             user = alcusr();
             printf("enter name: ");
             fgets(user->name, NAME_SIZE, stdin);
-            user->name[strcspn(user->name, "\n")] = '\0';
             break;
         case '2':
             frusr(user);
@@ -86,7 +84,6 @@ int main(void)
             note = malloc(NOTE_SIZE);
             printf("enter note: ");
             fgets(note, NOTE_SIZE, stdin);
-            note[strcspn(note, "\n")] = '\0';
             break;
         case '5':
             exit(0);
