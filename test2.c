@@ -7,8 +7,8 @@
 #define CLEAR_CMD "clear"
 #endif
 
-#define NAME_SIZE 16
-#define NOTE_SIZE 32
+#define NAME_BUF 16
+#define NOTE_BUF 32
 
 typedef struct {
     char *name;
@@ -33,15 +33,22 @@ void grtusr(char *name)
 user_s* alcusr(void)
 {
     user_s *user = malloc(sizeof(user_s));
-    user->name = malloc(NAME_SIZE);
+    if (!user) return NULL;
+    user->name = malloc(NAME_BUF);
+    if (!user->name) {
+        free(user);
+        return NULL;
+    }
     user->fp = grtusr;
     return user;
 }
 
 void frusr(user_s *user)
 {
-    free(user->name);
-    free(user);
+    if (user) {
+        free(user->name);
+        free(user);
+    }
 }
 
 void calusr(user_s *user)
@@ -63,37 +70,67 @@ int main(void)
     
     user_s *user = NULL;
     char *note = NULL;
-    char choice;
     
+    char choice;
     for (;;) {
         printf(">>> ");
         choice = getchar(); while (getchar() != '\n');
         switch (choice) {
         case '1':
-            user = alcusr();
-            printf("enter name: ");
-            fgets(user->name, NAME_SIZE, stdin);
+            if (user) {
+                printf("user already exists\n");
+            } else {
+                user = alcusr();
+                if (user) {
+                    printf("enter name: ");
+                    fgets(user->name, NAME_BUF, stdin);
+                    printf("user created\n");
+                } else {
+                    printf("failed to create user\n");
+                }
+            }
             break;
+
         case '2':
-            frusr(user);
+            if (user) {
+                frusr(user);
+                printf("user deleted\n");
+            } else {
+                printf("no user to delete\n");
+            }
             break;
+
         case '3':
-            grtusr(user->name);
+            if (user) {
+                calusr(user);
+            } else {
+                printf("no user to greet\n");
+            }
             break;
+
         case '4':
-            note = malloc(NOTE_SIZE);
-            printf("enter note: ");
-            fgets(note, NOTE_SIZE, stdin);
+            if (note) {
+                free(note);
+            }
+            note = malloc(NOTE_BUF);
+            if (note) {
+                printf("enter note: ");
+                fgets(note, NOTE_BUF, stdin);
+                printf("note created\n");
+            } else {
+                printf("failed to create note\n");
+            }
             break;
+
         case '5':
+            printf("exiting\n");
             exit(0);
-            break;
 
         default:
             printf("invalid option\n");
             break;
         }
     }
-    
+
     return 0;
 }
